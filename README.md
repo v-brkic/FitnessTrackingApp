@@ -5,9 +5,13 @@ A simple fitness tracking app built with **React** (Create React App), **Firebas
 ## Screenshots
 
 <div align="center">
-  <img src="assets/screenshot-1.png" width="260" alt="Screenshot 1" />
-  <img src="assets/screenshot-2.png" width="260" alt="Screenshot 2" />
-  <img src="assets/screenshot-3.png" width="260" alt="Screenshot 3" />
+  <img src="assets/fit5.jpeg" width="260" alt="Screenshot 1" />
+  <img src="assets/fit7.jpeg" width="260" alt="Screenshot 2" />
+  <img src="assets/fit1.jpeg" width="260" alt="Screenshot 3" />
+  <img src="assets/fit6.jpeg" width="260" alt="Screenshot 4" />
+  <img src="assets/fit3.jpeg" width="260" alt="Screenshot 5" />
+  <img src="assets/fit4.jpeg" width="260" alt="Screenshot 6" />
+  <img src="assets/fit2.jpeg" width="260" alt="Screenshot 7" />
 </div>
 
 ## Features
