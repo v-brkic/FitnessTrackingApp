@@ -1,0 +1,2683 @@
+:root{
+  --bg:#0b0b0f; --surface:#121216; --surface-2:#0f0f13; --text:#f7f7f7; --muted:#9ca3af; --border:#26262c;
+  --primary:#f97316; --primary-2:#fb923c; --accent:#22c55e; --teal:#38bdf8;
+  --danger-dark:#7f1d1d; --danger:#991b1b; --danger-bright:#b91c1c;
+  --ring: rgba(249,115,22,.25);
+  --fs-base: clamp(14px, 1.6vw, 15px);
+  --fs-title: clamp(18px, 2.8vw, 24px);
+  --radius:16px; --bottom-nav-h:64px;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size: var(--fs-base);
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(56,189,248,.08), transparent 60%),
+    radial-gradient(900px 500px at 85% -10%, rgba(161,98,7,.12), transparent 60%),
+    var(--bg);
+  color:var(--text);
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+.container{width:100%;max-width:1180px;margin:15px auto;padding:0 16px}
+.narrow{max-width:720px;margin:0 auto}
+.muted{color:var(--muted)}
+
+/* TITLES & TOPBAR */
+.app-title{margin:0;font-size:var(--fs-title);font-weight:900;letter-spacing:.3px;position:relative;padding-bottom:6px}
+.app-title::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;background:linear-gradient(90deg,var(--primary),var(--primary-2));opacity:.45}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 8px}
+.top-links{display:flex;align-items:center;gap:8px}
+.top-link{background:linear-gradient(180deg,#111217,#0c0d12);border:1px solid var(--border);color:#e5e7eb;padding:8px 12px;border-radius:12px;cursor:pointer}
+.top-link.active{border-color:var(--primary);color:var(--primary)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:#e5e7eb;padding:8px 12px;border-radius:12px;cursor:pointer}
+.btn-ghost.small{padding:6px 10px;font-size:12px;border-radius:10px}
+.btn-ghost.small.danger{border-color:#ef4444;color:#ff7b7b}
+.btn-primary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 14px;
+  border-radius:12px;border:1px solid transparent;cursor:pointer;font-weight:800;letter-spacing:.2px;
+  background:linear-gradient(180deg,var(--primary),var(--primary-2));color:#0c0c0e;box-shadow:0 8px 24px rgba(249,115,22,.25)
+}
+.btn-primary[disabled]{opacity:.6;cursor:not-allowed}
+.btn-back{
+  display:inline-flex;align-items:center;gap:8px;max-width:max-content;
+  background:transparent;border:1px solid var(--border);color:#e5e7eb;padding:6px 10px;border-radius:12px;cursor:pointer;width: 40px;height: 40px;
+}
+
+/* DASHBOARD */
+.dashboard{padding:6px 0 10px}
+.dash-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.dash-title{font-size:clamp(16px,2.4vw,22px);font-weight:900;letter-spacing:.3px}
+.dash-title span{color:var(--primary)}
+.dash-switch{display:flex;gap:8px}
+.chip{background:transparent;border:1px solid var(--border);color:#e5e7eb;padding:6px 10px;border-radius:999px;cursor:pointer;font-size:12px}
+.chip.active{border-color:var(--primary);color:var(--primary)}
+/* brojke vidljive (narančaste ili bijele) */
+.stat-card .stat-value{color:var(--primary-2)}
+.stat-card{background:linear-gradient(145deg, rgba(34,197,94,.06), transparent 60%),linear-gradient(180deg,#141418 0%, #0f0f13 100%);border:1px solid var(--border);border-radius:16px;padding:12px;text-align:left}
+.stat-card:nth-child(2){background:linear-gradient(145deg, rgba(56,189,248,.07), transparent 60%),linear-gradient(180deg,#141418 0%, #0f0f13 100%)}
+.stat-card.clickable{cursor:pointer}
+.stat-value{font-size:24px;font-weight:900;line-height:1}
+.stat-label{color:var(--muted);font-size:11px;margin-top:6px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:720px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+/* inline detail */
+.stat-expand{grid-column:1/-1;background:#121216;border:1px solid var(--border);border-radius:14px;padding:10px}
+.detail-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.detail-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:12px;background:#0f0f13;border:1px solid var(--border)}
+.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#0f0f13;border:1px solid var(--border);font-size:12px;color:#e5e7eb}
+
+/* PROGRESS PHOTOS */
+.progress-placeholder{margin:14px 0 18px}
+.pp-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.pp-title{font-weight:800;letter-spacing:.3px}
+.pp-sub{color:#cbd5e1;font-size:12px}
+.progress-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:720px){.progress-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.ph-tile{display:grid;place-items:center;height:120px;border-radius:14px;border:1px dashed var(--border);color:#9aa0a6;background:#0f0f13}
+
+/* PAGE */
+.page{padding:16px 0 90px}
+.page-title{font-size:clamp(20px,3vw,28px);font-weight:900;margin:0 0 8px}
+.page-sub{color:#cbd5e1;margin:0 0 18px;max-width:720px}
+
+/* AUTH (ako koristiš login/register) */
+.auth{min-height:100dvh;display:grid;place-items:center;padding:20px}
+.auth-card{width:min(420px, calc(100% - 32px));background:#121216;border:1px solid var(--border);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.35);padding:18px}
+.auth-title{margin:0 0 10px;font-size:22px;font-weight:900}
+.auth-form{display:grid;gap:10px;margin-top:10px}
+.auth-input{width:100%}
+.auth-btn{width:100%}
+.auth-error{background:#1a1111;border:1px solid #ef4444;color:#ff9b9b;padding:8px;border-radius:10px;font-size:13px}
+.auth-foot{margin-top:10px;color:#cbd5e1;font-size:13px}
+
+/* FORMS */
+.input{height:40px;padding:0 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);font-size:14px}
+.input::placeholder{color:#6b7280}
+.input:focus{outline:2px solid var(--primary);outline-offset:2px}
+.form-row{display:grid;gap:6px;margin-bottom:10px}
+.exercise-list{display:grid;gap:8px}
+.exercise-row{display:flex;flex-wrap:wrap;gap:8px}
+.exercise-row.nice{padding:8px;border:1px dashed var(--border);border-radius:12px;background:linear-gradient(180deg,#15161b,#121216)}
+
+/* WORKOUTS HEADER & LIST */
+.workouts-header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;margin-bottom:12px}
+.workouts-header .page-title{text-align:center}
+.create-btn{justify-self:end;box-shadow:0 10px 30px rgba(251,146,60,.25)}
+@media (max-width:560px){
+  .workouts-header{grid-template-columns:1fr;gap:10px}
+  .workouts-header .page-title{text-align:left}
+  .create-btn{justify-self:start;width:100%}
+}
+.workout-stack{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.wk-days{padding-left:128px}
+@media (max-width:480px){ .wk-days{padding-left:106px} }
+.wk-days-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:260px}
+.wk-day-label{font-size:12px;color:#cbd5e1;text-align:center;opacity:.85}
+
+.workout-card-list{
+  display:grid; grid-template-columns:116px 1fr auto; gap:12px;
+  padding:10px; border-radius:16px;
+  background:linear-gradient(120deg, rgba(251,146,60,.06), rgba(34,197,94,.05)), #141418;
+  border:1px solid var(--border); align-items:center;
+}
+@media (max-width:480px){
+  .workout-card-list{ grid-template-columns:96px 1fr; }
+  .wk-done{ grid-column: 1 / -1; margin-top:8px; }
+}
+.workout-card-list:hover{border-color:var(--primary)}
+.workout-card-list.clickable{cursor:pointer}
+.wc-media{position:relative;height:86px;border-radius:12px;overflow:hidden;background:#101116}
+.wc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wc-gradient{position:absolute;inset:0;box-shadow:inset 0 -60px 100px rgba(0,0,0,.55)}
+.wc-info{min-width:0}
+.wc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.wc-title{font-weight:900;letter-spacing:.3px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;color:#fff}
+.wc-diff{display:flex;align-items:center;gap:10px}
+.wc-meta{display:flex;align-items:center;gap:10px}
+.icon-btn{background:transparent;border:1px solid var(--border);color:#e5e7eb;width:28px;height:28px;border-radius:8px;cursor:pointer;display:grid;place-items:center}
+.icon-btn.danger{border-color:#ef4444;color:#ff7b7b}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#121216;border:1px solid var(--border);font-size:11px;color:#cbd5e1}
+
+.wk-done{display:flex;align-items:center}
+.wk-done-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:260px}
+.check{height:28px;min-width:44px;border-radius:8px;border:1px solid var(--border);background:#0f0f13;color:#9aa0a6;cursor:pointer}
+.check.on{background:linear-gradient(180deg,var(--accent),#16a34a);color:#08110b;border-color:#16a34a;font-weight:800}
+
+/* DETAILS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.card .body{padding:12px}
+.hero-card{overflow:hidden;margin-bottom:12px}
+.hero-media{position:relative;height:160px;background:#141418}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-gradient{position:absolute;inset:0;box-shadow:inset 0 -90px 120px rgba(0,0,0,.6)}
+.hero-body{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;border-top:1px solid var(--border)}
+.hero-row{display:flex;align-items:center;justify-content:space-between}
+
+.exercise-rows{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ex-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px;border-radius:12px;background:#121216;border:1px solid var(--border)}
+.ex-left{min-width:0}.ex-title{font-weight:700}.ex-sub{font-size:12px}
+.ex-right{display:flex;gap:8px;align-items:center}
+
+/* DIFFICULTY (pull bar) */
+.diff-slider{display:grid;gap:6px}
+.diff-slider.sm{gap:4px}
+.diff-slider .diff-range{
+  appearance:none; -webkit-appearance:none; width:100%; height:0; outline:none; background:transparent;
+  position:relative; z-index:2;
+}
+.diff-slider .diff-range::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:18px; height:18px; border-radius:50%;
+  background:var(--danger-bright); border:2px solid #1b1b1f; box-shadow:0 2px 8px rgba(0,0,0,.5); cursor:pointer;
+}
+.diff-slider .diff-range::-moz-range-thumb{
+  width:18px;height:18px;border-radius:50%;background:var(--danger-bright);border:2px solid #1b1b1f;box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:pointer;
+}
+.diff-slider .diff-meter{position:relative;height:12px;border-radius:999px;overflow:hidden}
+.diff-slider .diff-bg{position:absolute;inset:0;background:#121216;border:1px solid var(--border)}
+.diff-slider .diff-fill{
+  position:absolute;left:0;top:0;bottom:0;
+  background:linear-gradient(90deg,var(--danger-dark), var(--danger), var(--danger-bright));
+  transition:width .15s ease;
+}
+.diff-slider .diff-labels{display:flex;justify-content:space-between;font-size:12px;color:#cbd5e1;opacity:.9}
+
+.diff-readonly{position:relative;height:10px;border-radius:999px;overflow:hidden;min-width:80px}
+.diff-readonly.sm{height:8px}
+.diff-readonly .diff-bg{position:absolute;inset:0;background:#121216;border:1px solid var(--border)}
+.diff-readonly .diff-fill{
+  position:absolute;left:0;top:0;bottom:0;
+  background:linear-gradient(90deg,var(--danger-dark), var(--danger), var(--danger-bright));
+}
+
+/* STARS – uklonjeno; prestalo se koristiti */
+
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;display:grid;place-items:center;z-index:100;background:rgba(8,10,14,.55);backdrop-filter:blur(6px)}
+.modal-card{width:min(700px, calc(100% - 24px));background:linear-gradient(180deg,#141418,#0f0f13);border:1px solid var(--border);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--border)}
+.modal-header h3{margin:0}
+.modal-body{padding:14px}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;padding:12px 14px;border-top:1px solid var(--border)}
+.modal-actions{display:flex;gap:8px}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;height:var(--bottom-nav-h);display:flex;align-items:center;justify-content:space-around;background:rgba(11,11,15,.85);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:0 8px;z-index:60}
+.bn-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:44px;min-width:80px;border:0;background:transparent;color:#e5e7eb;cursor:pointer}
+.bn-item .bn-icon{line-height:0}
+.bn-item.active{color:var(--primary)}
+@media (min-width:721px){ .bottom-nav{display:none;} }
+
+/* ADVICE – širina kao container */
+.advice-box{
+  position:fixed; left:50%; transform:translateX(-50%);
+  width:min(1180px, calc(100% - 24px));
+  bottom:calc(var(--bottom-nav-h) + 10px); z-index:55;
+}
+.advice-box-inner{
+  display:flex;align-items:center;gap:10px;background:#0f1014;border:1px solid var(--border);
+  border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.3)
+}
+.advice-label{font-weight:800;letter-spacing:.4px;color:#e5e7eb}
+.advice-text{color:#e5e7eb}
+
+/* === Mini drop ispod kliknutog stat pravokutnika (bez kartice) === */
+.mini-expand{ /* stoji u istoj koloni kao i kartica jer je sljedeći grid item */
+  margin-top: 6px;
+}
+.mini-list{
+  list-style: none;
+  margin: 0;
+  padding: 0 2px;              /* mala poravnanja */
+  display: grid;
+  gap: 6px;
+}
+.mini-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  line-height: 1.15;
+}
+
+/* === Advice (Tip) plave boje === */
+.advice-label{ color: #3b82f6 !important; } /* blue-500 */
+
+/* === Mobile “vrh previsoko” – uzmi safe area i normaliziraj razmak === */
+.topbar{
+  margin: calc(16px + env(safe-area-inset-top)) 0 8px !important;
+}
+@media (max-width: 560px){
+  .topbar{
+    margin: calc(10px + env(safe-area-inset-top)) 0 6px !important;
+  }
+  .page{
+    padding-top: 12px; /* malo zraka ispod topbara */
+  }
+}
+/* --- Uljepšani modal (suptilni top-left narančasti glow) --- */
+.modal-card{
+  position: relative;
+  overflow: hidden;
+}
+.modal-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(420px 260px at 0% 0%, rgba(249,115,22,.16), transparent 60%);
+  pointer-events:none;
+}
+
+/* --- Corner gradijent za stranice s detaljima --- */
+.corner-grad{
+  position: relative;
+  border-radius: 16px;
+  background:
+    radial-gradient(620px 360px at 0% 0%, rgba(249,115,22,.10), transparent 65%);
+  padding: 8px; /* suptilni 'frame' efekt oko sadržaja */
+}
+.corner-grad > .backbar,
+.corner-grad > .card { /* kompenziraj padding vizualno */
+  margin-left: 4px;
+  margin-right: 4px;
+}
+/* Glow za pojedinačne kartice (npr. Vježbe box) */
+.glow-tl{
+  position: relative;
+  overflow: hidden;
+}
+.glow-tl::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(420px 260px at 0% 0%, rgba(249,115,22,.12), transparent 60%);
+  pointer-events:none;
+}
+/* Upload & preview */
+.upload-wrap{display:grid;gap:8px}
+.file-input{
+  background:var(--surface-2); border:1px solid var(--border); color:#e5e7eb;
+  height:40px; padding:6px 8px; border-radius:12px;
+}
+.img-preview{
+  margin-top:8px; border:1px solid var(--border); border-radius:12px;
+  background:#0f0f13; overflow:hidden; max-height:220px;
+}
+.img-preview img{width:100%; height:100%; object-fit:cover}
+/* Progress photos grid items (slike + add tile) */
+.ph-item{border-radius:14px; overflow:hidden; border:1px solid var(--border); background:#0f0f13}
+.progress-img{width:100%; height:100%; object-fit:cover}
+.ph-add{border:1px dashed var(--border); color:#e5e7eb; font-weight:800}
+.ph-add:hover{border-color:var(--primary); color:var(--primary)}
+
+/* Backbar poravnanje desno za koš */
+.backbar{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; margin-top: 12px;}
+.backbar-right{display:flex; align-items:center; gap:8px}
+
+/* “Gotovo” toggle za vježbe */
+.pill-btn{
+  border:1px solid var(--border); background:#0f0f13; color:#cbd5e1;
+  padding:6px 10px; border-radius:999px; cursor:pointer; font-size:12px;
+}
+.pill-btn.on{
+  background:linear-gradient(180deg, var(--accent), #16a34a);
+  color:#08110b; border-color:#16a34a; font-weight:800;
+}
+.ex-row.done .ex-title,
+.ex-row.done .ex-sub{ color:#9ca3af; opacity:.7; }
+
+/* (Opcijski) male animacije na hoveru */
+.ph-tile, .ph-item { transition: transform .12s ease; }
+.ph-tile:hover, .ph-item:hover { transform: translateY(-2px); }
+/* ===== Modal – skrol, sticky header/footer, safe area ===== */
+.modal-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(700px, calc(100% - 24px));
+  /* full-height na mobu, ali uz margine */
+  max-height: calc(100dvh - 24px);
+  background: linear-gradient(180deg, #141418, #0f0f13);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  overflow: hidden; /* važno: klipaj sticky slojeve */
+}
+
+/* suptilni top-left glow koji smo dodali ranije */
+.modal-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(420px 260px at 0% 0%, rgba(249,115,22,.16), transparent 60%);
+  pointer-events:none;
+}
+
+.modal-header{
+  position: sticky; top: 0; z-index: 2;
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, rgba(20,20,24,.95), rgba(15,15,19,.92));
+  border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.modal-header h3{margin:0}
+
+.modal-body{
+  flex: 1 1 auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* iOS momentum */
+  padding: 14px 14px 22px;
+}
+
+.modal-footer{
+  position: sticky; bottom: 0; z-index: 2;
+  display:flex; justify-content:flex-end; gap:8px;
+  padding: 12px 14px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(15,15,19,.92), rgba(15,15,19,.96));
+  border-top: 1px solid var(--border);
+}
+
+/* ===== Dodatni razmak pri dnu stranica da ništa ne zapne ispod nava/tips-a ===== */
+.page{
+  /* prebrisat će staru vrijednost jer je CSS niže u datoteci */
+  padding-bottom: calc(var(--bottom-nav-h) + 140px);
+}
+
+/* (opcionalno) malo zraka i u formama u modalu */
+.modal-body .exercise-list{ padding-bottom: 12px; }
+/* Centralni badge za kilažu u ex-row */
+.ex-row { position: relative; }
+.ex-weight-center{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  pointer-events:none;
+  padding:6px 10px; border-radius:999px;
+  background:rgba(16,17,22,.85);
+  border:1px solid var(--border);
+  font-weight:900; letter-spacing:.2px;
+}
+.ex-weight-center .unit{ margin-left:4px; font-weight:700; opacity:.8 }
+
+/* Kontrole težine desno */
+.weight-controls{ display:flex; align-items:center; gap:6px }
+.btn-step{
+  border:1px solid var(--border); background:#0f0f13; color:#e5e7eb;
+  height:28px; padding:0 8px; border-radius:10px; cursor:pointer;
+}
+.input-weight{ width:80px }
+
+/* Edit modal – redovi su već .exercise-row.nice pa izgleda konzistentno */
+/* Centralni badge za kilažu u ex-row */
+.ex-row { position: relative; }
+.ex-weight-center{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  pointer-events:none;
+  padding:6px 10px; border-radius:999px;
+  background:rgba(16,17,22,.85);
+  border:1px solid var(--border);
+  font-weight:900; letter-spacing:.2px; color:#fff;
+}
+.ex-weight-center .unit{ margin-left:4px; font-weight:700; opacity:.85 }
+/* ===== Superset (editor) ===== */
+.sup-form{
+  display:grid;
+  grid-template-columns: 28px 1fr repeat(4,120px) 160px;
+  gap:8px; align-items:center; width:100%;
+}
+@media (max-width:720px){
+  .sup-form{ grid-template-columns: 28px 1fr 110px 110px 90px 90px 140px; }
+}
+@media (max-width:520px){
+  .sup-form{ grid-template-columns: 28px 1fr 100px 100px; }
+  .sup-form input:nth-of-type(n+4), .sup-form select:nth-of-type(n+4){ grid-column: 2 / -1; }
+}
+.sup-tag{
+  display:inline-grid; place-items:center;
+  width:28px; height:28px; border-radius:8px;
+  border:1px solid var(--border); background:#0f0f13; color:#e5e7eb; font-weight:900;
+}
+.sup-tag.sup-b{ border-color:#ef4444; color:#ff7b7b }
+
+/* ===== Superset (detalji) ===== */
+.ex-superset{ position:relative; padding:10px; border-radius:12px; background:#121216; border:1px solid var(--border); }
+.ex-superset .ex-row{ background:#0f0f13; border:1px solid var(--border); border-radius:12px; padding:10px; }
+.ex-superset .ex-row + .ex-row{ margin-top:22px; }
+.sup-connector{
+  position:absolute; left:50%; transform:translateX(-50%);
+  top:50%; width:0; height:0; pointer-events:none;
+}
+.sup-badge{
+  position:absolute; top:-8px; left:50%; transform:translate(-50%,-50%);
+  display:flex; align-items:center; gap:6px;
+  background:rgba(153,27,27,.15); color:#fecaca;
+  border:1px solid #ef4444; border-radius:999px; padding:4px 10px;
+  box-shadow:0 6px 20px rgba(239,68,68,.25);
+}
+.sup-arrows{ color:#ef4444; font-weight:900 }
+.sup-text{ font-size:12px; font-weight:800; letter-spacing:.3px }
+/* ===== Superset editor ===== */
+.sup-row-head{
+  display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:6px;
+}
+.sup-toggle{ display:flex; align-items:center; gap:8px; font-weight:700; }
+
+/* layout koji NE skrola horizontalno: wrapa se na manjim širinama */
+.sup-form{
+  display:grid; gap:8px; align-items:center; width:100%;
+  grid-auto-rows:minmax(36px,auto);
+}
+.sup-form.is-super{
+  grid-template-columns: 32px 1fr 100px 100px 90px 90px 160px;
+}
+.sup-form.not-super{
+  grid-template-columns: 1fr 100px 100px 90px 90px 160px;
+}
+
+/* kolone – dodaj klase na inpute da lijepo rade u wrapu */
+.sup-form .name{ min-width:160px; }
+.sup-form .sets, .sup-form .reps, .sup-form .minutes, .sup-form .weight{ min-width:80px; text-align:center; }
+.sup-form .group{ min-width:140px; }
+.sup-tag{
+  display:inline-grid; place-items:center;
+  width:32px; height:32px; border-radius:8px;
+  border:1px solid var(--border); background:#0f0f13; color:#e5e7eb; font-weight:900;
+}
+.sup-tag.sup-b{ border-color:#ef4444; color:#ff7b7b }
+
+@media (max-width:720px){
+  .sup-form.is-super{ grid-template-columns: 32px 1fr 90px 90px; }
+  .sup-form.not-super{ grid-template-columns: 1fr 90px 90px; }
+  .sup-form .minutes, .sup-form .weight, .sup-form .group{ grid-column: 2 / -1; }
+}
+@media (max-width:460px){
+  .sup-form.is-super{ grid-template-columns: 32px 1fr; }
+  .sup-form.not-super{ grid-template-columns: 1fr; }
+  .sup-form .sets, .sup-form .reps, .sup-form .minutes, .sup-form .weight, .sup-form .group{
+    grid-column: 1 / -1;
+  }
+}
+
+/* ===== Superset prikaz u detaljima – sve u JEDNOM okviru ===== */
+.ex-superset.onebox{
+  position:relative; padding:12px; border-radius:12px;
+  background:#121216; border:1px solid var(--border);
+}
+.ex-superset .ex-row.sub{
+  background:#0f0f13; border:1px solid var(--border); border-radius:12px; padding:10px;
+}
+.ex-superset .ex-row.sub + .ex-row.sub{ margin-top:22px; }
+
+/* centrirani badge u sredini okvira, ispred (z-index) */
+.sup-center{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  z-index:3; display:flex; align-items:center; gap:8px;
+  background:rgba(153,27,27,.18); color:#fecaca;
+  border:1px solid #ef4444; border-radius:999px; padding:4px 12px;
+  box-shadow:0 8px 26px rgba(239,68,68,.35);
+}
+.sup-center .sup-arrows{ color:#ef4444; font-weight:900 }
+.sup-center .sup-text{ font-size:12px; font-weight:800; letter-spacing:.3px }
+
+/* kilaža ostaje u sredini svake "ex-row" */
+.ex-row { position: relative; }
+.ex-weight-center{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  pointer-events:none; padding:6px 10px; border-radius:999px;
+  background:rgba(16,17,22,.85); border:1px solid var(--border);
+  font-weight:900; letter-spacing:.2px; color:#fff;
+}
+.ex-weight-center .unit{ margin-left:4px; font-weight:700; opacity:.85 }
+/* ====== Editor: spriječi horizontalni skrol i “skrivanje” kanti ====== */
+.modal-card, .modal-body, .exercise-row.nice { overflow-x: hidden; }
+.sup-row-head { display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:6px; }
+.sup-toggle { display:flex; align-items:center; gap:8px; font-weight:700; }
+
+/* Sva polja iste širine kolone; inputs/selekti se rastežu do 100% */
+.sup-form .input { width:100%; }
+
+/* Grid layout koji se wrapa bez overflowa */
+.sup-form{
+  display:grid; gap:8px; align-items:center; width:100%;
+  grid-auto-rows:minmax(36px,auto);
+}
+
+/* Šire: sve u jednom redu bez skrola */
+.sup-form.is-super{
+  grid-template-columns: 32px minmax(0,1fr) 90px 90px 80px 90px minmax(140px,1fr);
+}
+.sup-form.not-super{
+  grid-template-columns: minmax(0,1fr) 90px 90px 80px 90px minmax(140px,1fr);
+}
+
+/* Tighter breakpoint – ranije prelamanje da stane i na uže mobitele */
+@media (max-width: 860px){
+  .sup-form.is-super{ grid-template-columns: 32px minmax(0,1fr) 90px 90px; }
+  .sup-form.not-super{ grid-template-columns: minmax(0,1fr) 90px 90px; }
+  .sup-form .minutes, .sup-form .weight, .sup-form .group{ grid-column: 2 / -1; }
+}
+@media (max-width: 520px){
+  .sup-form.is-super{ grid-template-columns: 32px minmax(0,1fr); }
+  .sup-form.not-super{ grid-template-columns: minmax(0,1fr); }
+  .sup-form .sets, .sup-form .reps, .sup-form .minutes, .sup-form .weight, .sup-form .group{ grid-column: 1 / -1; }
+}
+
+/* Superset prikaz — jedan okvir s badgeom u prvom planu (z-index) */
+.ex-superset.onebox{ position:relative; padding:12px; border-radius:12px; background:#121216; border:1px solid var(--border); }
+.ex-superset .ex-row.sub{ background:#0f0f13; border:1px solid var(--border); border-radius:12px; padding:10px; }
+.ex-superset .ex-row.sub + .ex-row.sub{ margin-top:22px; }
+.sup-center{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:4;
+  display:flex; align-items:center; gap:8px;
+  background:rgba(153,27,27,.18); color:#fecaca;
+  border:1px solid #ef4444; border-radius:999px; padding:4px 12px;
+  box-shadow:0 8px 26px rgba(239,68,68,.35);
+}
+.sup-center .sup-arrows{ color:#ef4444; font-weight:900 }
+.sup-center .sup-text{ font-size:12px; font-weight:800; letter-spacing:.3px }
+
+/* “Gotovo” gumb (vracen) + sivi stil kad je gotovo */
+.pill-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:6px 10px; border-radius:999px; border:1px solid var(--border);
+  background:#0f0f13; color:#e5e7eb; cursor:pointer; font-size:12px;
+}
+.pill-btn.on{
+  background:linear-gradient(180deg, #16a34a, #15803d);
+  border-color:#16a34a; color:#08110b; font-weight:800;
+}
+.ex-row.done .ex-title{ color:#9ca3af; opacity:.65; }
+.ex-row.done .ex-sub{ color:#9ca3af; opacity:.55; }
+
+/* Kilaža – centralni badge ostaje */
+.ex-row { position: relative; }
+.ex-weight-center{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  pointer-events:none; padding:6px 10px; border-radius:999px;
+  background:rgba(16,17,22,.85); border:1px solid var(--border);
+  font-weight:900; letter-spacing:.2px; color:#fff;
+}
+.ex-weight-center .unit{ margin-left:4px; font-weight:700; opacity:.85 }
+/* Weight form */
+.weight-form{margin:8px 0 10px}
+.wf-row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+.wf-field{display:flex;flex-direction:column;gap:6px}
+.wf-label{font-size:12px;color:var(--muted)}
+.wf-actions{display:flex}
+@media (max-width:560px){
+  .wf-row{grid-template-columns:1fr;align-items:stretch}
+  .wf-actions .btn-primary{width:100%}
+}
+
+/* Simple chart */
+.chart-wrap{margin-top:8px}
+.chart{width:100%;height:auto;display:block}
+.chart-line{stroke:var(--primary)}
+.chart-dot{fill:#fff;stroke:var(--primary);stroke-width:2}
+.grid{stroke:#2a2a30;stroke-width:1}
+
+/* Progress photos su već stilizirane kroz .progress-grid / .ph-tile u tvojem CSS-u */
+/* Weight form + chart */
+.weight-form{margin:8px 0 10px}
+.wf-row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+.wf-field{display:flex;flex-direction:column;gap:6px}
+.wf-label{font-size:12px;color:var(--muted)}
+.wf-actions{display:flex}
+@media (max-width:560px){
+  .wf-row{grid-template-columns:1fr;align-items:stretch}
+  .wf-actions .btn-primary{width:100%}
+}
+
+.chart-wrap{margin-top:8px}
+.chart{width:100%;height:auto;display:block}
+.chart-line{stroke:var(--primary)}
+.chart-dot{fill:#fff;stroke:var(--primary);stroke-width:2}
+.grid{stroke:#2a2a30;stroke-width:1}
+/* Desktop header – sakrij na mobitelu (jer imaš BottomNav) */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 0}
+.top-links{display:flex;align-items:center;gap:8px}
+.top-link{background:linear-gradient(180deg,#111217,#0c0d12);border:1px solid var(--border);color:#e5e7eb;padding:8px 12px;border-radius:12px;cursor:pointer}
+.top-link.active{border-color:var(--primary);color:var(--primary)}
+@media (max-width:720px){ .topbar{display:none} }
+
+/* Tips bar (fiksno pri dnu, širina kao container) */
+.advice-box{
+  position: relative; left:50%; transform:translateX(-50%);
+  bottom: 0;
+  width:min(1180px, calc(100% - 24px));
+  bottom:calc(var(--bottom-nav-h,64px) + 10px); z-index:55;
+}
+.advice-box-inner{
+  display:flex;align-items:center;gap:10px;background:#0f1014;border:1px solid var(--border);
+  border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.3)
+}
+.advice-label{font-weight:800;letter-spacing:.4px}
+.advice-text{color:#e5e7eb}
+/* Početna: manje “zraka” na dnu (oko 5vh), bez posebne druge pozadine */
+.page.home{
+  padding-bottom: max(5vh, 68px); /* da ne udari u BottomNav */
+}
+
+/* Graf – ljepše osi i labele */
+.chart-wrap{margin-top:8px}
+.chart{width:100%;height:auto;display:block}
+.chart-line{stroke:var(--primary)}
+.chart-dot{fill:#fff;stroke:var(--primary);stroke-width:2}
+.grid{stroke:#2a2a30;stroke-width:1}
+.axis-line{stroke:#3a3a42;stroke-width:1}
+.chart-axis-text{fill:#9ca3af;font-size:10px}
+.chart-value-label{fill:#e5e7eb;font-size:11px;font-weight:700}
+
+/* Statistika naslov: manji i manje bold */
+.dash-title.light{
+  font-size: clamp(16px, 2.2vw, 20px);
+  font-weight: 700;
+}
+/* --- Home dno: oko 5vh, bez "drugog poda" --- */
+.page.home{
+  padding-bottom: max(5vh, 68px);
+}
+
+/* --- Graf: smanjen font + urednije --- */
+.chart-wrap{margin-top:8px}
+.chart{width:100%;height:auto;display:block}
+.chart-line{stroke:var(--primary)}
+.chart-dot{fill:#fff;stroke:var(--primary);stroke-width:2}
+.grid{stroke:#2a2a30;stroke-width:1}
+.axis-line{stroke:#3a3a42;stroke-width:1}
+.chart-axis-text{fill:#9ca3af;font-size:9px}       /* manji font na osima */
+.chart-value-label{fill:#e5e7eb;font-size:10px;font-weight:700} /* manja brojka na liniji */
+
+/* --- Globalni glow samo na samom vrhu appa --- */
+/* ukloni staru višebojnu pozadinu ako postoji */
+body{ background: var(--bg) !important; position: relative; }
+/* top-only glow sloj */
+body::before{
+  content:"";
+  position: fixed; left:0; right:0; top:0; height: 24vh; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(60% 120% at 100% -40%, rgba(161,98,7,.16), transparent 70%),
+    radial-gradient(60% 120% at 0%   -40%, rgba(56,189,248,.12), transparent 70%);
+}
+/* ukloni bilo kakav "corner glow" na karticama/page-containerima */
+.glow-tl, .corner-grad{ background-image:none !important; box-shadow:none !important; }
+.card.glow-tl::before{ display:none !important; }
+/* Prikaži element samo na mobitelu / sakrij na desktopu */
+.only-mobile { display: none; }
+@media (max-width: 720px) {
+  .only-mobile { display: block; }
+}
+
+/* (opcionalno) Prikaži samo na desktopu / sakrij na mobitelu */
+.only-desktop { display: block; }
+@media (max-width: 720px) {
+  .only-desktop { display: none; }
+}
+/* Home dno: oko 5vh, bez "drugog poda" */
+.page.home{ padding-bottom: max(5vh, 68px); }
+
+/* Graf – smanjen font i sve uredno u okviru */
+.chart-wrap{margin-top:8px}
+.chart{width:100%;height:auto;display:block}
+.chart-line{stroke:var(--primary)}
+.chart-dot{fill:#fff;stroke:var(--primary);stroke-width:2}
+.grid{stroke:#2a2a30;stroke-width:1}
+.axis-line{stroke:#3a3a42;stroke-width:1}
+.chart-axis-text{fill:#9ca3af;font-size:8.5px}   /* manji font na osima */
+.chart-value-label{fill:#e5e7eb;font-size:9.5px;font-weight:700} /* manja brojka na liniji */
+
+/* Glow samo na vrhu appa */
+body{ background: var(--bg) !important; position: relative; }
+body::before{
+  content:"";
+  position: fixed; left:0; right:0; top:0; height: 22vh; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(60% 120% at 100% -40%, rgba(161,98,7,.14), transparent 70%),
+    radial-gradient(60% 120% at 0%   -40%, rgba(56,189,248,.10), transparent 70%);
+}
+/* ugasi glow na karticama / containerima */
+.glow-tl, .corner-grad{ background-image:none !important; box-shadow:none !important; }
+.card.glow-tl::before{ display:none !important; }
+
+/* Unosi težine – lista i akcije */
+.weights-actions{margin-top:8px}
+.weights-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.weights-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.weight-row{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;background:#0f0f13;border:1px solid var(--border);border-radius:10px;padding:6px 8px;font-size:12px
+}
+.weight-row .kg{font-weight:800}
+.icon-btn.xs{width:24px;height:24px;border-radius:6px;font-size:12px}
+/* chart header s olovkom */
+.chart-head{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0 2px;
+}
+.icon-btn.active{border-color:var(--primary);color:var(--primary)}
+
+/* collapsible dropdown ispod grafa */
+.collapsible{
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transform: translateY(-4px);
+  transition: max-height .25s ease, opacity .2s ease, transform .2s ease;
+}
+.collapsible.open{
+  max-height:320px; /* dovoljno za listu; povecaj ako trebaju stari unosi */
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* ostatak već imaš: weights-actions / weights-list / weight-row / .icon-btn.xs itd. */
+/* Top-only corner glow (subtle, ne utječe na skrol) */
+/* Top-left diagonal glow do 50% ekrana */
+body{
+  background: var(--bg) !important;
+  position: relative;
+}
+body::before{
+  content:"";
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 60vh;          /* poviseno da komotno dosegne sredinu */
+  pointer-events: none;
+  z-index: 0;
+
+  /* jači narančasti glow iz kuta */
+  background: radial-gradient(1200px 800px at 0% 0%,
+    rgba(249,115,22,.35) 0%,
+    rgba(249,115,22,.18) 28%,
+    rgba(249,115,22,.08) 52%,
+    transparent 70%
+  );
+
+  /* dijagonalna maska: puni do 50%, pa fade-out */
+  -webkit-mask-image: linear-gradient(45deg,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 50%,
+    rgba(0,0,0,0) 70%
+  );
+          mask-image: linear-gradient(45deg,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 50%,
+    rgba(0,0,0,0) 70%
+  );
+}
+/* === Mobile safe-area & prirodan odmak od vrha === */
+:root{
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* samo mobitel/tablet širine */
+@media (max-width: 720px){
+
+  /* glavni page top padding: dodaj malo zraka + notch safe-area */
+  .page{
+    padding-top: calc(16px + var(--safe-top));
+  }
+
+  /* naslov koji se prikazuje samo na mobu (da ne bude zalijepljen) */
+  .app-title.only-mobile{
+    margin-top: 4px;         /* fin odmak ispod safe-area */
+    margin-bottom: 8px;
+  }
+
+  /* sekcijski headeri (npr. Workouts header, Stats header) malo spusti */
+  .workouts-header,
+  .dash-head{
+    margin-top: 6px;
+  }
+
+  /* Bottom nav & tips: poštuj donji safe-area i ne sudaraj se */
+  .bottom-nav{
+    padding-bottom: max(8px, var(--safe-bottom));
+    height: calc(var(--bottom-nav-h,64px) + max(0px, var(--safe-bottom)));
+  }
+  .advice-box{
+    bottom: calc(var(--bottom-nav-h,64px) + max(12px, var(--safe-bottom)) + 10px);
+  }
+}
+
+/* Ako si odlučio prikazivati i TopBar na mobitelu (inače je skriven):
+   odkomentiraj sljedeće da dobije prirodan odmak od vrha
+@media (max-width: 720px){
+  .topbar{
+    display:flex;                // ili ukloni svoje "display:none"
+    padding-top: calc(8px + var(--safe-top));
+    margin-top: 0;
+  }
+}
+*/
+
+/* =========================
+   MOBITEL GUTTERI U POSTOTCIMA + STICKY HEADER
+   ========================= */
+:root{
+  /* postotni horizontalni gutter za mobitele */
+  --gutter-mobile: 4.3vw;   /* ≈16px na širini 375px */
+  --inner-pad-mobile: 3.2vw;/* unutarnje margine u karticama/sekcijama */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (max-width: 720px){
+
+  /* 1) globalni horizontalni odmak u postotcima */
+  .container{
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+    width: 100%;
+    max-width: 1180px; /* desktop ostaje isti */
+  }
+
+  /* sekcije/kartice – malo mekše unutarnje margine u postotcima */
+  .card .body{
+    padding: var(--inner-pad-mobile);
+  }
+
+  /* inputi i mali elementi dobiju horizontalni “air” bez ruba do ruba */
+  .input{
+    padding-left: 3vw;
+    padding-right: 3vw;
+    border-radius: 3.5vw; /* vizualno ekvivalentno prethodnim px za mob širine */
+  }
+
+  /* 2) TopBar VIDLJIV NA MOBU + sticky na vrhu sa safe-area */
+  .topbar{
+    display: flex !important;                     /* poništi staro skrivanje */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: calc(2.2vw + var(--safe-top)) var(--gutter-mobile) 2.2vw;
+    margin: 0;                                    /* bez dodatnog razmaka iznad */
+    background: rgba(11,11,15,.75);               /* lagani backdrop */
+    -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  .top-links .top-link{
+    padding: 1.6vw 3vw;
+    border-radius: 3.8vw;
+  }
+
+  /* pošto je header sada stalno vidljiv na mobu, sakrij “page title” duplikat */
+  .app-title.only-mobile{ display: none !important; }
+
+  /* Page vertikalni ritam – ugodan odmak od vrha i dna u postotcima */
+  .page{
+    padding-top: 3.5vw;                             /* ispod headera */
+    padding-bottom: calc(max(5vh, 68px) + var(--safe-bottom));
+  }
+
+  /* Tips bar – širina vezana uz postotne guttere (da prati container) */
+  .advice-box{
+    width: calc(100% - (2 * var(--gutter-mobile)));
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(var(--bottom-nav-h,64px) + max(12px, var(--safe-bottom)) + 10px);
+  }
+
+  /* Bottom nav: poštuj safe-bottom, ništa ne reže */
+  .bottom-nav{
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+    padding-bottom: max(8px, var(--safe-bottom));
+    height: calc(var(--bottom-nav-h,64px) + max(0px, var(--safe-bottom)));
+  }
+
+  /* Workouts header neka diše u postotcima (ako je prisutan) */
+  .workouts-header{
+    margin-top: 2.2vw;
+    gap: 2.2vw;
+  }
+
+  /* Grid s fotkama – postotni razmaci da ne “lijepe” rub */
+  .progress-grid{
+    gap: 3vw;
+  }
+  .ph-tile{
+    border-radius: 4vw;
+  }
+}
+
+/* ====== Top-left diagonal glow (zadržavamo, ne dira ostatak stranice) ====== */
+body{
+  background: var(--bg) !important;
+  position: relative;
+}
+body::before{
+  content:"";
+  position: fixed;
+  left: 0; 
+  top: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(1200px 800px at 0% 0%,
+  rgba(0,0,0,1) 0%,
+    rgba(249,115,22,.35) 0%,
+    rgba(249,115,22,.18) 28%,
+    rgba(249,115,22,.08) 52%,
+    transparent 70%
+  );
+  -webkit-mask-image: linear-gradient(45deg,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 50%,
+    rgba(0,0,0,0) 70%
+  );
+          mask-image: linear-gradient(45deg,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 50%,
+    rgba(0,0,0,0) 70%
+  );
+}/* --- Mobile header: samo naslov, bez pozadinske trake --- */
+:root{
+  --safe-top: env(safe-area-inset-top, 0px);
+  --gutter-mobile: 4.3vw; /* isti gutter koji koristiš za rubove */
+}
+
+@media (max-width: 720px){
+  /* prikaži TopBar na mobu, ali kao “čisti” naslov bez pozadine */
+  .topbar{
+    display: flex !important;
+    position: relative !important;
+    background: transparent !important;
+    -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+    border: 0 !important;
+
+    /* prirodan odmak od vrha i rubova */
+    padding: calc(8px + var(--safe-top)) var(--gutter-mobile) 8px !important;
+
+    /* centriraj naslov; promijeni u flex-start ako želiš lijevo poravnanje */
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* sakrij linkove u headeru na mobitelu – ostaje samo “Fitness App” */
+  .topbar .top-links{ display: none !important; }
+
+  /* stil naslova u TopBaru na mobitelu */
+  .topbar .app-title{
+    margin: 0;
+    font-size: clamp(18px, 6vw, 24px);
+    font-weight: 900;
+    text-align: center;
+  }
+
+  /* budući da naslov živi u TopBaru, sakrij duplikat unutar stranice */
+  .app-title.only-mobile{ display: none !important; }
+
+  /* stranica: mali odmak ispod headera da ne bude zalijepljeno */
+  .page{ padding-top: 8px; }
+}
+/* ===== Progress photos – horizontalni carousel s 2/3 tile-a i captionom ===== */
+.progress-carousel{ position:relative; }
+.pc-track{
+  display:flex; gap: 3vw;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 2vw 0 1vw;
+  -webkit-overflow-scrolling: touch;
+}
+.pc-track::-webkit-scrollbar{ height: 6px; }
+.pc-track::-webkit-scrollbar-thumb{ background:#26262c; border-radius:6px; }
+.pc-item{
+  scroll-snap-align: start;
+  flex: 0 0 48%;                /* ~2 tile-a na mobitelu */
+  display: flex; flex-direction: column; gap: 6px;
+}
+@media (min-width: 721px){
+  .pc-item{ flex-basis: 31%; }  /* ~3 tile-a na većim širinama */
+}
+
+.pc-item .ph-tile{
+  height: 42vw;                 /* visina razumna na mobu */
+  max-height: 260px;            /* limit na desktopu */
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #0f0f13;
+}
+.ph-caption{
+  font-size: 11px;
+  color: #cbd5e1;
+  line-height: 1.3;
+  min-height: 1.2em;           /* da ne “skače” grid kad opis fali */
+}
+
+.pc-item.add .ph-tile{
+  border: 1px dashed var(--border);
+  color: #9aa0a6;
+}
+
+/* strelice */
+.pc-arrow{
+  position:absolute; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(15,16,20,.8);
+  color: #e5e7eb; cursor: pointer;
+  display:grid; place-items:center;
+  z-index: 1;
+}
+.pc-arrow.left{ left: -4px; }
+.pc-arrow.right{ right: -4px; }
+@media (max-width: 420px){
+  .pc-arrow.left{ left: -2px; }
+  .pc-arrow.right{ right: -2px; }
+}
+/* chart header s olovkom */
+.chart-head{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0 2px;
+}
+.icon-btn.active{border-color:var(--primary);color:var(--primary)}
+
+/* collapsible dropdown ispod grafa */
+.collapsible{
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transform: translateY(-4px);
+  transition: max-height .25s ease, opacity .2s ease, transform .2s ease;
+}
+.collapsible.open{
+  max-height:320px; /* povecaj po potrebi */
+  opacity:1;
+  transform: translateY(0);
+}
+
+.app-title {
+  font-size: clamp(16px, 5vw, 24px);
+  text-align: center;
+  font-weight: bold;
+  position: relative; /* Koristi position:relative */
+  margin-top: 2%; /* Ovo je početni razmak za desktop i tablet */
+}
+
+/* Media query za mobilnu verziju (ako je širina ekrana manja od 768px) */
+@media (max-width: 768px) {
+  .app-title {
+    margin-top: 1%; /* Za mobilne uređaje, postavljamo margin-top na 1% */
+  }
+}
+/* ======= MOBILE OVERRIDES (HEADER + WORKOUT DETAILS) ======= */
+
+/* sigurni razmaci */
+:root{
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --gutter-mobile: 4.3vw; /* ~16px na 375px širini */
+}
+
+/* ---------- HEADER: Fitness App gore lijevo, bliže vrhu ---------- */
+@media (max-width: 720px){
+  .topbar{
+    display: flex !important;
+    position: relative !important;
+    background: transparent !important;
+    -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+    border: 0 !important;
+
+    padding: calc(6px + var(--safe-top)) var(--gutter-mobile) 6px !important;
+    margin: 0 !important;
+
+    justify-content: flex-start !important;  /* L I J E V O  poravnanje */
+    align-items: center !important;
+    gap: 0 !important;
+  }
+  .topbar .top-links{ display: none !important; } /* na mobu samo naslov */
+  .topbar .app-title{
+    margin: 0 !important;
+    font-size: clamp(18px, 5.2vw, 22px) !important;
+    font-weight: 900 !important;
+    text-align: left !important;
+  }
+
+  /* stranice: mali odmak ispod headera da ne “lijepi” sadržaj */
+  .page{ padding-top: 8px !important; }
+}
+
+/* ---------- WORKOUT DETAILS: raspored za mobitel, bez preklapanja ---------- */
+/* 1) Red vježbe neka se na mobitelu složi u blokove jedan ispod drugog */
+@media (max-width: 560px){
+  .exercise-rows{ gap: 10px !important; }
+
+  .ex-row{
+    grid-template-columns: 1fr !important;    /* sve u jedan stupac */
+    align-items: flex-start !important;
+    padding: 10px 10px 12px !important;
+  }
+
+  .ex-left{ width: 100% !important; }
+  .ex-right{
+    margin-top: 6px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;               /* prelamaj pilule u više redova */
+    gap: 6px !important;
+    justify-content: flex-start !important;
+  }
+
+  /* 2) Kilaža – umjesto “absolute” preko sadržaja, spusti je ispod i centriraj */
+  .ex-weight-center{
+    position: static !important;              /* više nije absolute */
+    transform: none !important;
+    display: block !important;
+    margin: 8px auto 0 !important;            /* ispod svega, centrirano */
+    text-align: center !important;
+  }
+
+  /* 3) Hero info u detaljima – složi u jedan stupac da stane */
+  .hero-body{
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+}
+
+/* ---------- (ne-mobilno) sitna zaštita od overlaya: ostavi malo visine reda ---------- */
+.ex-row{ min-height: 56px; } /* da centralni badge ima “zraka” na širim širinama */
+
+/* ---------- Dodatno: naslov “only-mobile” ako ga koristiš unutar stranice ---------- */
+.only-mobile{ display: none; }
+@media (max-width: 720px){
+  .only-mobile{
+    display: block;
+    margin: 4px var(--gutter-mobile) 8px;   /* malo zraka lijevo/desno */
+  }
+}
+/* === INLINE KILAŽA NA MOBU + SAKRIVANJE CENTRALNOG BADGEA === */
+
+/* helper klase */
+.mobile-only { display: none; }
+.desktop-only { display: block; }
+
+@media (max-width: 560px){
+  .desktop-only { display: none !important; }
+  .mobile-only  { display: inline-flex !important; }
+}
+
+/* mala pilula za kilažu u redu s “Gotovo” */
+.weight-inline{
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+  background: #0f0f13;
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* vrati centralni badge samo za desktop */
+@media (max-width: 560px){
+  .ex-weight-center{ display: none !important; }
+}
+
+/* === SUPERSET DIVIDER (umjesto absolute badgea) === */
+.sup-divider{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0.25rem auto;         /* centriraj između A i B */
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  color: #fecaca;
+  background: rgba(153,27,27,.14);
+  border: 1px solid #ef4444;
+  box-shadow: 0 6px 18px rgba(239,68,68,.20);
+}
+.sup-arrows{ color:#ef4444; font-weight:900 }
+.sup-text{ letter-spacing:.3px }
+
+/* malo zbij oblogu unutar ex-superset.onebox */
+.ex-superset.onebox{ padding: 12px; }
+.ex-superset.onebox .ex-row.sub + .sup-divider{ margin-top: 6px; }
+.sup-divider + .ex-row.sub{ margin-top: 6px; }
+
+/* na užem ekranu još kompaktnije */
+@media (max-width:560px){
+  .sup-divider{ padding: 5px 10px; font-size: 11px; }
+}
+/* Podcrtaj naziv vježbe (suptilno) */
+.ex-title{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(249,115,22,.55); /* narančasti hint */
+}
+
+/* Različite boje za setove/reps/min */
+.pill-sets{
+  background: rgba(34,197,94,.14);
+  border-color: #16a34a;
+  color: #86efac;
+}
+.pill-reps{
+  background: rgba(56,189,248,.14);
+  border-color: #38bdf8;
+  color: #bae6fd;
+}
+.pill-min{
+  background: rgba(245,158,11,.16);
+  border-color: #f59e0b;
+  color: #fde68a;
+}
+
+/* Superset okvir jasno crven */
+.ex-superset.onebox{
+  border-color: #ef4444 !important;
+  box-shadow: inset 0 0 0 1px rgba(239,68,68,.20);
+}
+
+/* Divider (već postoji) – malo jači na hover/press ako želiš
+.ex-superset.onebox:hover .sup-divider{ box-shadow:0 8px 28px rgba(239,68,68,.28); }
+*/
+
+/* Mobilna inline kilaža već je definirana – ostavljamo je */
+/* ====== PWA fullscreen / iOS safe-area ====== */
+html, body, #root { height: 100%; }
+body {
+  min-height: 100dvh;           /* koristi realnu visinu ekrana na mobitelima */
+  overscroll-behavior-y: contain;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;  /* ne povećava tekst na iOS */
+  touch-action: manipulation;      /* manji rizik slučajnog zooma */
+}
+
+/* ====== Progress lightbox ====== */
+.lightbox{
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.9);
+  display: grid; place-items: center;
+  padding: 6vh 4vw;
+}
+.lightbox-img{
+  max-width: 92vw; max-height: 78vh; object-fit: contain; border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.lightbox-caption{
+  margin-top: 12px; color: #e5e7eb; font-size: 13px; text-align: center;
+}
+.lightbox-close{
+  position: absolute; top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right));
+  width: 36px; height: 36px; border-radius: 50%;
+  display:grid;place-items:center;
+  background: rgba(20,20,24,.8); color:#fff;
+  border: 1px solid #26262c; cursor: pointer;
+}
+
+/* ====== Workouts: dani (Pon/Sri/Pet...) poravnaj s kvačicama na mobitelu ====== */
+@media (max-width: 560px){
+  /* neka grid za kvačice i grid za nazive dana imaju istu širinu i budu poravnati desno */
+  .wk-done-grid,
+  .wk-days-grid{
+    max-width: 260px;   /* isti kao u postojećem kodu */
+    margin-left: auto;  /* “gurni” na desnu stranu */
+  }
+  .wk-days{
+    padding-left: 0 !important;
+    margin-top: 6px;           /* malo zraka ispod kvačica */
+  }
+  .wk-day-label{
+    text-align: center;        /* točno ispod svakog checkboxa */
+  }
+}
+
+/* (sigurnosno) ako su ti checkovi drugačije širine, svedi ih da budu u ravnini */
+.wk-done-grid { justify-items: center; }
+.wk-days-grid { justify-items: center; }
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* Globalni header: naslov + logo (desno), fiksiran pri vrhu */
+.app-header {
+  position: fixed;
+  top: max(6px, var(--safe-top));
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 0 16px;
+  background: transparent; /* ostavi tvoju postojeću pozadinu appa */
+}
+
+/* Naslov (ne diramo tvoj postojeći .app-title stil osim margine) */
+.app-header .app-title {
+  margin: 0; /* bez dodatnog razmaka gore/dolje */
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 900;
+}
+
+/* Desni logo placeholder */
+.global-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  background: #111;              /* fallback pozadina */
+  border: 1px solid var(--border);
+}
+
+.global-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Minimalan odmak sadržaja ispod fiksnog headera (da se ne preklapa) */
+.container.page {
+  /* povećaj ako ti treba više zraka */
+  padding-top: calc(28px + 8px + var(--safe-top));
+}
+/* ==== Mobile: koristi SAMO GlobalHeader, i logo u centru ==== */
+@media (max-width: 720px){
+  /* sakrij bilo koji page naslov koji ubacuješ u samim stranicama */
+  .app-title.only-mobile { 
+    display: none !important;
+  }
+
+  /* TopBar (ako ga imaš) ne treba na mobu */
+  .topbar {
+    display: none !important;
+  }
+
+  /* GlobalHeader: logo centriran, tekst naslova sakriven */
+  .app-header{
+    justify-content: center !important;  /* centriraj sadržaj */
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .app-header .app-title{
+    display: none !important;            /* sakrij "Fitness App" tekst */
+  }
+  #adjust{
+    width: 8vh;
+    height: 8vh;
+    margin-bottom: 10px;
+  }
+
+  /* Daj malo mjesta ispod fiksnog headera da sadržaj ne bude ispod njega */
+  .container.page{
+    padding-top: calc(32px + 10px + env(safe-area-inset-top, 0px)) !important;
+  }
+}
+/* --- iOS: dodatni “air” ispod sadržaja (da stane caption i ništa ne zapne uz BottomNav) --- */
+.page.home{
+  /* postojećem dnu dodaj još malo prostora */
+  padding-bottom: calc(max(5vh, 68px) + 3vh);
+}
+
+/* univerzalno: maleni spacer na SVIM page containerima */
+.container.page::after{
+  content: "";
+  display: block;
+  height: 3vh; /* ~3% ekstra skrola ispod zadnjeg elementa */
+}
+
+/* Ako koristiš “black-translucent”, osiguraj da top ne upadne pod status bar */
+@supports (padding: max(0px)) {
+  .container.page{
+    padding-top: calc(16px + env(safe-area-inset-top, 0px));
+  }
+}
+
+/* ==== iOS: spriječi auto-zoom na inputima tako da je font >=16px ==== */
+@media (max-width: 768px){
+  .input, input, select, textarea {
+    font-size: 16px !important; /* iPhone neće zoomirati */
+  }
+}
+
+/* specifično za polje kilaže: numerička tipkovnica + bolji tap target */
+.input-kg{
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+/* dodatno: spriječi double-tap zoom “ghost” */
+body{
+  touch-action: manipulation;
+}
+:root { --header-h: 64px; }
+
+#adjust{
+  height: 80px;
+  width: auto;
+  display: block;
+}
+
+.app-header{
+  top: max(6px, env(safe-area-inset-top, 0px));
+  left: 0; right: 0;
+  z-index: 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 0 16px;
+  height: var(--header-h);
+  background: transparent;
+}
+
+/* Globalni odmak sadržaja ispod fiksnog headera */
+.container.page{
+  padding-top: calc(var(--header-h) + 7px + env(safe-area-inset-top, 0px)) !important;
+}
+
+@media (max-width: 720px){
+  :root { --header-h: 68px; }
+}
+/* ==== NOVI UI: tamni / narančasti === */
+:root{
+  --brand:#f97316;
+  --brand-2:#fb923c;
+  --muted:#a3a3b2;
+  --panel: rgba(18,18,22,.86);
+  --panel-soft: rgba(18,18,22,.72);
+}
+
+/* header hero */
+.home-new .hero-top{
+  display:flex; flex-direction:column; align-items:center; gap:12px; margin:6px 0 14px;
+}
+.drop-logo{
+  width:42px; height:42px; border-radius:12px;
+  background: radial-gradient(70% 70% at 50% 35%, var(--brand-2), var(--brand));
+  display:grid; place-items:center; font-size:0; box-shadow:0 10px 30px rgba(249,115,22,.35);
+}
+.hero-title{ margin:0; font-size:20px; font-weight:800; letter-spacing:.2px; }
+
+/* segmented control */
+.seg{ display:flex; gap:8px; background:rgba(255,255,255,.04); padding:6px; border-radius:16px; border:1px solid rgba(255,255,255,.06); }
+.seg.seg-large{ padding:8px; }
+.seg-item{
+  height:34px; padding:0 14px; border-radius:12px; background:transparent; color:#cbd5e1; border:none; cursor:pointer;
+}
+.seg-item.active{
+  background:linear-gradient(180deg,var(--brand),var(--brand-2));
+  color:#111216; font-weight:800;
+}
+
+/* cards */
+.card.kpi-card, .card.photos-card{
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(6px);
+}
+
+/* KPI row */
+.kpi-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+.kpi-title{ font-weight:800; }
+.kpi-row{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; }
+.kpi-value{ font-size:28px; font-weight:900; line-height:1; letter-spacing:.2px; }
+.kpi-sub{ color:var(--muted); font-size:12px; margin-top:4px; }
+.kpi-actions .add-track{
+  border:1px solid rgba(255,255,255,.12); background:transparent; color:#e5e7eb; height:36px; border-radius:12px;
+}
+.inline-form{ display:grid; grid-template-columns: 1fr 1fr auto; gap:8px; margin:10px 0 6px; }
+.chart-card{ margin-top:6px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:8px; }
+
+/* progress photos */
+.progress-carousel{ position:relative; }
+.pc-track{ display:flex; gap:10px; overflow:auto; scroll-behavior:smooth; padding:4px 2px; }
+.pc-item{ min-width: 46%; max-width: 60%; }
+.ph-tile{
+  position:relative; overflow:hidden; border-radius:12px; border:1px solid rgba(255,255,255,.08);
+  background:#0f0f13; cursor:zoom-in;
+}
+.ph-tile img{ display:block; width:100%; height:160px; object-fit:cover; }
+.ph-date{
+  position:absolute; top:6px; left:6px; font-size:12px; color:#e5e7eb; background:rgba(0,0,0,.36); padding:2px 8px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+}
+.ph-del{ position:absolute; top:6px; right:6px; border:none; background:rgba(239,68,68,.15); color:#fecaca; border-radius:10px; padding:4px 6px; cursor:pointer; }
+.pp-title{ font-weight:800; }
+.photos-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,.12); color:#e5e7eb; }
+
+/* chart container */
+.chart-wrap{ width:100%; }
+
+/* inputs harmonija */
+.input{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+
+/* “primary” */
+.btn.primary{
+  background:linear-gradient(180deg,var(--brand),var(--brand-2));
+  color:#0c0c0e; font-weight:900; border:none;
+}
+/* ===== HOME V2 – clean background + modern hero ===== */
+
+/* čista pozadina: gornja polovica crna, prema dnu topli gradient */
+body{ 
+  background: linear-gradient(180deg,
+    #0b0b0f 0%,
+    #0b0b0f 52%,
+    #141012 60%,
+    #1c110f 72%,
+    #26120c 84%,
+    #331408 100%
+  ) !important;
+}
+/* ugasi stare glow slojeve ako postoje */
+body::before{ display:none !important; }
+
+/* HERO */
+.hero-progress{
+  text-align:center;
+  padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 6px;
+}
+.hero-logo{
+  width: 44px; height: 44px; margin: 0 auto 8px;
+  border-radius: 12px; overflow: hidden;
+  display:grid; place-items:center;
+  background: linear-gradient(180deg, #ff8a3c, #f97316);
+  box-shadow: 0 8px 28px rgba(249,115,22,.28);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.hero-logo img{ width:100%; height:100%; object-fit:contain; }
+.hero-title{
+  margin: 6px 0 10px;
+  font-size: clamp(20px, 5.6vw, 28px);
+  font-weight: 900; letter-spacing: .3px;
+}
+
+/* Segmented control (Progress / Bodyweight) */
+.seg-control{
+  display:inline-flex; gap:6px; padding:4px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+}
+.seg{
+  padding: 8px 12px; border-radius: 12px; border:0;
+  background: transparent; color: #cfd2d6; font-weight: 800; cursor: default;
+}
+.seg.active{
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
+  color: #0c0c0e; box-shadow: 0 10px 30px rgba(249,115,22,.25);
+}
+
+/* BODYWEIGHT card */
+.bw-card{ border-radius: 18px; overflow: hidden; }
+.bw-card .body{ padding: 0; } /* nemamo .body ovdje, ali card već ima padding u tvojoj temi */
+
+.bw-head{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding: 12px 12px 8px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+}
+.bw-title{ font-weight:900; letter-spacing:.3px; }
+
+.bw-range{
+  display:inline-flex; gap:6px; padding:4px; border-radius:12px;
+  background: rgba(255,255,255,.04); border:1px solid var(--border);
+}
+.range-btn{
+  padding:6px 10px; border-radius:10px; border:0; background:transparent; color:#cfd2d6; font-weight:800;
+}
+.range-btn.active{
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
+  color:#0c0c0e;
+}
+
+.bw-row{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding: 10px 12px 6px;
+}
+.bw-current .num{ font-size: clamp(26px,5.4vw,32px); font-weight:900; }
+.bw-current .unit{ font-size: 16px; font-weight:800; opacity:.9; margin-left:4px; }
+.bw-sub{ margin-top:2px; }
+
+.add-track{ height:36px; }
+
+.bw-form{
+  display:grid; grid-template-columns: 1fr 1fr auto; gap:10px;
+  padding: 8px 12px 12px; border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+}
+.bw-form .input{ height: 42px; }
+.bw-form .save{ height: 42px; }
+
+@media (max-width: 560px){
+  .bw-form{ grid-template-columns: 1fr 1fr; }
+  .bw-form .save{ grid-column: 1 / -1; }
+}
+
+/* Chart – već imaš stilove; ovo samo malo “zadeblja” liniju */
+.chart-line{ stroke: var(--primary); }
+.chart-dot{ fill:#fff; stroke: var(--primary); stroke-width: 2; }
+
+/* Photos header */
+.photos-head{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  margin-bottom: 8px;
+}
+
+/* Početna: dnu malo zraka */
+.page.home{ padding-bottom: max(5vh, 68px); }
+/* ===== Global background (jedan, kontinuiran sloj) ===== */
+html, body, #root {
+  min-height: 100%;
+  background: #0b0b0d; /* fallback */
+}
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Jedna, velika pozadina bez “seams” */
+  background:
+    radial-gradient(1100px 700px at 0% -10%, rgba(255,140,64,.28), transparent 60%),
+    linear-gradient(
+      180deg,
+      #0b0b0d 0%,
+      #0b0b0d 50%,
+      rgba(255,132,58,.10) 65%,
+      rgba(255,120,40,.18) 80%,
+      rgba(255,108,24,.26) 100%
+    );
+  /* iOS fix – ne koristi background-attachment:fixed, pseudo-element je već "fixed" */
+}
+
+/* Ako imaš stari kutni gradijent na stranici – ugasi ga da ne preklapa glavni */
+.corner-grad::before,
+.page.home::before {
+  display: none !important;
+}
+
+/* ===== Header / hero ===== */
+/* Sakrij PRVI (gornji) logo ako su slučajno dva u stacku */
+.home-hero .logo-stack img:first-of-type { display: none !important; }
+/* (Ako nemaš .logo-stack, vidi edit u Home.js ispod – tamo ga postavljamo.) */
+
+/* ===== Kartice na najvišoj razini – “seamless” ===== */
+.card.seamless {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.card.seamless > .body {
+  padding: 0;
+}
+
+/* Unutarnje sekcije u tim karticama i dalje su “paneli” */
+.panel-block {
+  margin: 12px 0 0 0;
+  border-radius: 18px;
+  background: rgba(22,22,25,.72);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.45),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+  overflow: hidden;
+}
+.panel-block .panel-head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 16px 8px 16px;
+}
+.panel-block .panel-body { padding: 12px 16px 16px; }
+
+/* Polja za unos u formi */
+.weight-form .input {
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.06);
+  color: #eaecef;
+}
+.weight-form .btn-primary {
+  background: linear-gradient(180deg, #ff8a3d, #ff6f1e);
+  color: #1b1b1d;
+  border: 0;
+  box-shadow: 0 10px 24px rgba(255,120,40,.25);
+}
+
+/* Graf unutar panela da “sjedne” uz rubove */
+.card.seamless .chart-wrap { padding: 0 8px 8px; }
+
+/* Progress Photos panel – bez vanjskog okvira */
+.pp-panel .pp-head { padding:16px; }
+.pp-panel .progress-carousel { padding: 8px 8px 16px; }
+
+/* Sitno polish */
+.group-tabs, .chip {
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.chip.active {
+  background: linear-gradient(180deg, #ff8a3d, #ff6f1e);
+  color: #111215;
+  border: 0;
+  box-shadow: 0 6px 20px rgba(255,120,40,.25);
+}
+/* ========= 1) POZADINA – jedan sloj, bez “seams”, topla pri dnu ========= */
+html, body, #root { min-height: 100%; background:#0b0b0d; }
+body::before{
+  content:"";
+  position: fixed; inset:0; z-index:-1; pointer-events:none;
+  /* jedinstvena pozadina – linear do dna + topla radial pri dnu */
+  background:
+    linear-gradient(180deg,
+      #0b0b0d 0%,
+      #0b0b0d 52%,
+      rgba(255,132,58,.10) 68%,
+      rgba(255,120,40,.18) 84%,
+      rgba(255,108,24,.26) 100%
+    ),
+    radial-gradient(60% 38% at 50% 100%,
+      rgba(255,120,40,.34) 0%,
+      rgba(255,120,40,.12) 55%,
+      transparent 100%
+    );
+}
+/* UGASI sve stare kutne/sekundarne gradijente koji znaju napravit “crtu” */
+.corner-grad::before, .page.home::before { display:none !important; }
+
+/* ========= 2) TOP-LEVEL SEKCIJE bez rubova/okvira ========= */
+.card.seamless { background: transparent !important; border:0 !important; box-shadow:none !important; padding:0; }
+.card.seamless > .body { padding:0; }
+
+/* Unutarnji panel – bez inset linije, samo blagi “glass” */
+.panel-block{
+  margin: 10px 0 0 0;
+  border-radius: 18px;
+  background: rgba(22,22,25,.78);
+  box-shadow: 0 12px 34px rgba(0,0,0,.45); /* NEMA inset-a */
+  overflow: hidden;
+  border: 0;
+}
+.panel-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 16px 8px; }
+.panel-body{ padding: 12px 16px 16px; }
+
+/* ========= 3) FORMA ZA KILAŽU – grid, ništa ne izlazi van ========= */
+.weight-form .wf-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* datum | kilaža */
+  gap: 12px;
+}
+@media (min-width:560px){
+  .weight-form .wf-row{ grid-template-columns: 1fr 1fr auto; } /* + Save desno */
+}
+.weight-form .wf-field{ min-width:0; }                    /* spriječi overflow placeholdera */
+.weight-form .input{ width:100%; min-width:0; box-sizing:border-box; }
+.weight-form .wf-actions{ grid-column: 1 / -1; }          /* na mobitelu Save cijela širina */
+@media (min-width:560px){ .weight-form .wf-actions{ grid-column: auto; } }
+
+/* dugme */
+.weight-form .btn-primary{
+  width:100%;
+  background: linear-gradient(180deg,#ff8a3d,#ff6f1e);
+  color:#141416; border:0;
+  box-shadow:0 10px 24px rgba(255,120,40,.25);
+}
+
+/* ======== 4) GRAF – unutarnji padding da ne udara u rub ======== */
+.card.seamless .chart-wrap{ padding: 0 8px 10px; }
+
+/* ======== 5) PROGRESS PHOTOS panel bez rubova ======== */
+.pp-panel .pp-head{ padding:16px; }
+.pp-panel .panel-body{ padding: 8px 8px 16px; }
+
+/* ======== 6) BOTTOM NAV – fiksno dno + safe-area ======== */
+:root{ --navH: 84px; }
+.bottom-nav, .tabbar, nav.bottom, .app-tabbar{
+  position: fixed !important;
+  left: 0; right: 0; bottom: 0;
+  z-index: 50;
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
+  backdrop-filter: blur(6px);
+}
+.page, .container.page{
+  padding-bottom: calc(var(--navH) + env(safe-area-inset-bottom) + 16px) !important;
+}
+
+/* (obrisi rubić ispod panela koji si zaokružio) */
+.panel-block, .panel-head, .panel-body{
+  border: 0 !important;
+  box-shadow: none; /* panel-block gore već dobiva jedini shadow */
+}
+
+/* ===== SIMPLE: logo vidiš na vrhu, skrola s sadržajem, nema fixed/sticky ===== */
+
+/* 1) ništa fiksno */
+.app-header,
+.topbar,
+.hero-progress,
+.hero-logo,
+.drop-logo,
+#adjust {
+  position: static !important;
+  z-index: auto !important;
+}
+
+/* 2) logo – mali razmak do naslova */
+#adjust,
+.hero-logo,
+.drop-logo {
+  display: block !important;
+  margin: 15px auto 15px !important;   /* centriran, mali razmak */
+  width: 70px !important;            /* po želji promijeni */
+  height: 70px !important;
+  opacity: 1 !important;
+}
+
+/* 3) naslov “Your progress” – manji razmak */
+.hero-title,
+.app-title {
+  margin: 2px 0 8px !important;
+}
+
+/* 4) makni rezervu koju si imao zbog fixed headera */
+:root { --header-h: 0px !important; }
+.container.page { padding-top: 12px !important; }
+
+/* 5) za svaki slučaj: ugasi bilo kakvo sakrivanje loga */
+.page.home :is(.logo,.brand,.brand-logo,.home-logo,.header-logo) {
+  position: static !important;
+  transform: none !important;
+  z-index: auto !important;
+}
+
+.page-header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin:8px 0 14px;
+}
+.page-header .title{ font-size:28px; font-weight:800; letter-spacing:.2px; }
+.page-header .actions{ display:flex; gap:10px; }
+
+.btn-pill{
+  padding:10px 14px; border-radius:999px;
+  background:linear-gradient(180deg,#ff922e,#ff6b00);
+  color:#0b0c0f; font-weight:700; border:0; cursor:pointer;
+  box-shadow:0 8px 28px rgba(255,115,0,.25), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.btn-pill:active{ transform:translateY(1px); }
+
+/* ==== WEIGHT FORMA – GRID, BEZ PREKLAPANJA ==== */
+.weight-form .wf-row{
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;   /* datum | kilaža */
+  gap: 10px;
+}
+
+@media (max-width: 420px){
+  .weight-form .wf-row{
+    grid-template-columns: 1fr;     /* na užim ekranima jedan ispod drugog */
+  }
+}
+
+.weight-form .wf-field{ min-width: 0; }           /* spriječi 'širenje' */
+.weight-form .wf-field .input{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ukloni margine/pomake koji mogu gurati polja jedno u drugo */
+.weight-form .wf-field + .wf-field{ margin-left: 0; }
+
+/* ako imaš dekorativne ‘glow’/shadowe na inputima, ugasi ih u toj formi */
+.weight-form .input{
+  box-shadow: none;
+}
+:root{ --navH: 84px; } /* ostavi ako već imaš */
+
+/* smanji dodatno dno koje drži sadržaj iznad donje navigacije */
+.page, .container.page{
+  padding-bottom: calc((var(--navH,84px) * 0.5) + env(safe-area-inset-bottom) + 16px) !important;
+}
+
+/* ako imaš neki dodatni spacer na dnu – smanji ga */
+.container.page::after{
+  content:""; display:block; height: 2vh; /* prije je bilo ~3vh */
+}
+/* kartica “Bodyweight” forma:  datum | kilaza | Spremi  */
+.bw-form,
+.weight-form .wf-row {
+  display: grid !important;
+  grid-template-columns: 1fr 0.8fr auto !important; /* suženo desno polje */
+  gap: 10px !important;                              /* razmak između polja */
+  align-items: end !important;
+}
+
+/* spriječi bilo kakvo “sjedanje” jedno u drugo */
+.bw-form .input,
+.weight-form .input {
+  min-width: 0 !important;
+  width: 100% !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
+/* mobiteli: polja ispod-ispod, gumb cijela širina */
+@media (max-width:560px){
+  .bw-form,
+  .weight-form .wf-row { grid-template-columns: 1fr 1fr !important; }
+  .bw-form .save,
+  .weight-form .wf-actions { grid-column: 1 / -1 !important; }
+}
+/* ==== Progress minimal CSS ==== */
+.page-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 14px}
+.page-header .title{font-size:28px;font-weight:800;letter-spacing:.2px}
+.page-header .actions{display:flex;gap:10px}
+
+/* segmented control */
+.seg{display:flex;gap:8px;background:rgba(255,255,255,.04);padding:6px;border-radius:16px;border:1px solid rgba(255,255,255,.06)}
+.seg-item{height:34px;padding:0 14px;border-radius:12px;background:transparent;color:#cbd5e1;border:0;cursor:pointer;font-weight:800}
+.seg-item.active{background:linear-gradient(180deg,var(--primary),var(--primary-2));color:#0c0c0e;box-shadow:0 8px 24px rgba(249,115,22,.25)}
+
+.card.kpi-card{background:rgba(18,18,22,.86);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+.kpi-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.kpi-title{font-weight:800}
+.kpi-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.kpi-value{font-size:28px;font-weight:900;line-height:1;letter-spacing:.2px}
+.kpi-sub{color:var(--muted);font-size:12px;margin-top:4px}
+
+.inline-form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:8px;margin:10px 0 6px}
+@media (max-width:560px){.inline-form{grid-template-columns:1fr 1fr;}.inline-form .btn-primary{grid-column:1/-1}}
+
+.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:720px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat-card{background:linear-gradient(180deg,#141418 0%, #0f0f13 100%);border:1px solid var(--border);border-radius:16px;padding:12px}
+.stat-card.clickable{cursor:pointer}
+.stat-value{font-size:24px;font-weight:900;line-height:1}
+.stat-label{color:var(--muted);font-size:11px;margin-top:6px}
+
+.detail-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.detail-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:12px;background:#0f0f13;border:1px solid var(--border)}
+.icon-btn{background:transparent;border:1px solid var(--border);color:#e5e7eb;width:40px;height:40px;border-radius:8px;cursor:pointer;display:grid;place-items:center}
+.icon-btn.danger{border-color:#ef4444;color:#ff7b7b}
+.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:#121216;border:1px solid var(--border);font-size:11px;color:#cbd5e1}
+.unit{font-size:.8em;opacity:.9}
+
+/* chart */
+.chart{width:100%;height:auto;display:block}
+.chart-line{stroke:var(--primary)}
+.chart-dot{fill:#fff;stroke:var(--primary);stroke-width:2}
+.chart-axis-text{fill:#9ca3af;font-size:10px}
+
+/* --- Sticky segmentirani preklopnik (samo na mobu) --- */
+.seg-sticky{
+  position: sticky;
+  top: calc(8px + env(safe-area-inset-top, 0px));
+  z-index: 20;
+}
+
+/* Progress header + filter tipke */
+.progress-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 10px}
+.progress-title{font-weight:900;letter-spacing:.3px}
+.filters{display:flex;gap:8px}
+
+/* PB grid – 2 kolone na mobu, 4 na širem ekranu */
+.pb-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:720px){ .pb-grid{grid-template-columns:repeat(4,minmax(0,1fr))} }
+
+.pb-card{
+  background: rgba(22,22,25,.78);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.pb-label{color: var(--muted); font-size: 12px}
+.pb-value{font-size: 22px; font-weight: 900; line-height: 1; margin-top: 4px}
+
+/* Sparkline i grafovi — uvijek 100% širine, bez overflowa */
+.spark, .chart { width: 100%; height: auto; display: block }
+
+/* Mini stat */
+.stat-mini{
+  display:flex; align-items:center; justify-content:space-between;
+  background:#0f0f13; border:1px solid var(--border);
+  border-radius:10px; padding:8px; font-size:12px;
+}
+.stat-mini .val{ font-weight:800 }
+
+/* Spriječi horizontalni overflow unutar .container.page */
+.container.page{ overflow-x: hidden }
+
+/* ===== Workouts: keep Mon–Sun in ONE row ===== */
+.wk-days-grid,
+.wk-done-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;               /* po potrebi smanji na 4px ako je baš knap */
+  align-items: center;
+}
+
+/* labels (Mon..Sun) */
+.wk-day-label {
+  white-space: nowrap;
+  text-align: center;
+  font-size: 11px;        /* malo manje da sigurno stane */
+  line-height: 1;
+}
+
+/* check buttons */
+.wk-done-grid .check {
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1 / 1;    /* kvadratići, stanu ljepše */
+  padding: 0;
+  font-size: 12px;
+}
+/* ===== FIX: Bodyweight date + kg input preklapanje (iOS/Safari) ===== */
+.bw-form--fix{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important; /* datum | kg */
+  gap: 12px !important;
+  align-items: stretch !important;
+}
+
+.bw-form--fix .bw-field{
+  min-width: 0 !important; /* KLJUČNO: sprječava overflow u gridu */
+}
+
+.bw-form--fix .bw-field > .input{
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+.bw-form--fix .save{
+  grid-column: 1 / -1 !important; /* Save ide ispod preko cijele širine */
+}
+
+/* ako baš naleti ultra uski ekran */
+@media (max-width: 360px){
+  .bw-form--fix{
+    grid-template-columns: 1fr !important;
+  }
+}
+/* ===== Bodyweight inputs: 60/40 bez preklapanja (iOS safe) ===== */
+.bw-form.bw-form--fix{
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.bw-form.bw-form--fix .bw-form-row{
+  display: flex !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+/* KLJUČNO: min-width:0 da se input smije “stisnuti” i ne prelijeva preko drugog */
+.bw-form.bw-form--fix .bw-form-row > .input{
+  min-width: 0 !important;
+  width: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* 60/40 */
+.bw-form.bw-form--fix .bw-date{
+  flex: 0 0 calc(60% - 6px) !important;
+  max-width: calc(60% - 6px) !important;
+}
+
+.bw-form.bw-form--fix .bw-kg{
+  flex: 0 0 calc(40% - 6px) !important;
+  max-width: calc(33% - 6px) !important;
+}
+
+/* Save preko cijele širine */
+.bw-form.bw-form--fix .save{
+  width: 100% !important;
+}
+
+/* ako je ekran baš uzak, stavi jedan ispod drugog */
+@media (max-width: 360px){
+  .bw-form.bw-form--fix .bw-form-row{
+    flex-direction: column !important;
+  }
+  .bw-form.bw-form--fix .bw-date,
+  .bw-form.bw-form--fix .bw-kg{
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+  }
+}
+
+/* =========================================================
+   WEB / DESKTOP FIXES (NE DIRA MOB)
+   - uklanja dupli "Fitness App"
+   - centrira hero/logo
+   - smanjuje graf (visina + fontovi) da ne bude "prezoomiran"
+   - sprječava prevelike slike u home dijelu
+   ========================================================= */
+@media (min-width: 721px){
+
+  /* 1) DUPlI NASLOV: na desktopu sakrij stari global header
+     (to ti je onaj lijevi “Fitness App” koji se duplira s topbarom) */
+  .app-header{
+    display: none !important;
+  }
+
+  /* 2) Desktop tipografija: nemoj da clamp/vw razvuče sve preveliko */
+  :root{
+    --fs-base: 15px;
+    --fs-title: 22px;
+  }
+
+  /* 3) Topbar neka bude “jedini” header i uredan */
+  .topbar{
+    margin: 18px 0 14px !important;
+  }
+  .topbar .app-title{
+    margin: 0 !important;
+    font-size: 22px !important;
+  }
+  .topbar .app-title::after{
+    left: 0 !important;
+    right: auto !important;
+    width: 140px !important;   /* underline kraći na desktopu */
+  }
+
+  /* 4) HERO (logo + “Your progress”) centriraj */
+  .hero-progress,
+  .home-new .hero-top,
+  .home-hero{
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  /* tvoj logo je često #adjust – ograniči ga na desktopu i centriraj */
+  #adjust{
+    height: 52px !important;
+    width: auto !important;
+    margin: 12px auto 10px !important;
+    display: block !important;
+  }
+
+  /* 5) HOME layout: na desktopu neka “glavni sadržaj” bude uži (kao mob feel) */
+  .page.home{
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 6) GRAF: limitiraj visinu + smanji fontove unutar SVG-a */
+  .page.home .chart-wrap{
+    max-width: 860px;
+    margin: 10px auto 0;
+  }
+
+  /* Ako je tvoj graf SVG s klasom .chart */
+  .page.home svg.chart{
+    height: 260px !important;   /* KLJUČ: da ne pojede pola ekrana */
+  }
+
+  /* “prezoomirani” tekst u grafu */
+  .page.home .chart text{
+    font-size: 10px !important;
+  }
+
+  /* tanja linija (da ne izgleda kao autocesta na desktopu) */
+  .page.home .chart-line{
+    stroke-width: 3 !important;
+  }
+  .page.home .chart-dot{
+    stroke-width: 2 !important;
+  }
+}
+/* =========================================================
+   WEB FIX: ProgressDashboard chart date text + Workouts days alignment
+   (zalijepi na KRAJ CSS-a)
+   ========================================================= */
+
+/* ---------- 1) ProgressDashboard: manji datumi u sparkline grafu ---------- */
+@media (min-width: 721px){
+  .progress-dashboard .chart-axis-text{
+    font-size: 8px !important;      /* manji datum */
+    letter-spacing: .1px;
+  }
+  .progress-dashboard .chart-value-label{
+    font-size: 9px !important;
+  }
+}
+
+/* ---------- 2) Workouts: dani iznad kućica, skroz desno, sve u ravnini ---------- */
+
+/* Varijable za širinu kućica (možeš fino podešavati) */
+:root{
+  --wk-cell: 34px;   /* desktop checkbox size */
+  --wk-gap: 8px;
+}
+
+/* Header red s danima neka ima ISTI layout kao workout kartica (3 kolone) */
+.wk-days{
+  /* match .workout-card-list grid (116px | content | right column) */
+  display: grid !important;
+  grid-template-columns: 116px 1fr auto !important;
+  align-items: center !important;
+
+  /* da vizualno sjedne u stack kao kartice */
+  padding: 0 10px !important;
+  margin: 6px 0 8px !important;
+
+  /* makni stare padding-left hackove */
+  padding-left: 10px !important;
+}
+
+/* Sam grid dana ide u DESNU kolonu i shrinka se na sadržaj */
+.wk-days-grid{
+  grid-column: 3 !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(7, var(--wk-cell)) !important;
+  gap: var(--wk-gap) !important;
+
+  width: fit-content !important;
+  margin-left: auto !important;
+  justify-items: center !important;
+}
+
+/* Labeli dana – centrirani, mali */
+.wk-day-label{
+  font-size: 12px !important;
+  line-height: 1 !important;
+  opacity: .9;
+  text-align: center !important;
+  white-space: nowrap;
+}
+
+/* Desni stupac s kućicama – uvijek desno */
+.wk-done{
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+}
+
+/* Kućice: 7 komada u jednom redu, iste širine */
+.wk-done-grid{
+  display: grid !important;
+  grid-template-columns: repeat(7, var(--wk-cell)) !important;
+  gap: var(--wk-gap) !important;
+
+  width: fit-content !important;
+  margin-left: auto !important;
+  justify-items: center !important;
+  align-items: center !important;
+}
+
+/* Sam checkbox button – kvadrat, centriran check */
+.check{
+  width: var(--wk-cell) !important;
+  height: var(--wk-cell) !important;
+
+  min-width: 0 !important;     /* makni stari min-width:44px koji radi probleme */
+  padding: 0 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  line-height: 1 !important;
+  font-size: 14px !important;
+  border-radius: 10px !important;
+}
+
+/* Mobile: malo manje kućice da stane komotno */
+@media (max-width: 560px){
+  :root{
+    --wk-cell: 30px;
+    --wk-gap: 6px;
+  }
+
+  /* na mobu ne diramo tvoju karticu layout previše, samo poravnanje desno */
+  .wk-days{
+    grid-template-columns: 96px 1fr auto !important; /* match tvoj mobile breakpoint */
+    padding: 0 10px !important;
+  }
+}
+
+/* =========================================================
+   WORKOUTS: dovoljno širok desni stupac (edit/delete + 7 kućica)
+   + srednja kolona se smije stisnuti
+   ========================================================= */
+
+/* računamo kolko treba mjesta desno */
+@media (min-width: 721px){
+  :root{
+    --wk-cell: 34px;
+    --wk-gap: 8px;
+
+    /* 2 gumba (40+40) + gap između njih (12) */
+    --wk-actions: 92px;
+
+    /* razmak između akcija i kućica */
+    --wk-actions-gap: 16px;
+
+    /* širina samog grida kućica */
+    --wk-gridw: calc(var(--wk-cell) * 7 + var(--wk-gap) * 6);
+
+    /* ukupna širina desnog stupca */
+    --wk-rightw: calc(var(--wk-actions) + var(--wk-actions-gap) + var(--wk-gridw));
+  }
+
+  /* KARTICA: 3. kolona je fiksno dovoljno široka, 2. se smije stisnuti */
+  .workout-card-list{
+    grid-template-columns: 116px minmax(0, 1fr) var(--wk-rightw) !important;
+    overflow: hidden !important; /* safety */
+  }
+
+  /* DANI: neka koriste identičan grid kao kartice */
+  .wk-days{
+    grid-template-columns: 116px minmax(0, 1fr) var(--wk-rightw) !important;
+  }
+
+  /* desni blok u kartici neka bude u jednoj ravnini */
+  .wk-done{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: var(--wk-actions-gap) !important;
+  }
+
+  /* grid kućica uvijek isti (7 kom), i ne smije se širiti više od predviđenog */
+  .wk-done-grid{
+    display: grid !important;
+    grid-template-columns: repeat(7, var(--wk-cell)) !important;
+    gap: var(--wk-gap) !important;
+    width: var(--wk-gridw) !important;
+    justify-items: center !important;
+    align-items: center !important;
+  }
+
+  /* kućice kvadratne */
+  .check{
+    width: var(--wk-cell) !important;
+    height: var(--wk-cell) !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+
+  /* edit/delete gumbi – centriraj po visini (isti "rail" kao kućice) */
+  .workout-card-list .icon-btn{
+    width: 40px !important;
+    height: 40px !important;
+    display: grid !important;
+    place-items: center !important;
+    align-self: center !important;
+    transform: none !important; /* makni translateY ako ga imaš */
+  }
+}
+
+/* SREDNJI DESKTOP (ako je prozor uži) -> malo smanji kućice da sve stane */
+@media (min-width: 721px) and (max-width: 980px){
+  :root{
+    --wk-cell: 30px;
+    --wk-gap: 6px;
+  }
+}
+/* =========================================================
+   WORKOUTS – DESNI BLOK (edit/delete + 7 kućica)
+   - ništa ne izlazi van (nema rezanja)
+   - sve u istoj ravnini (vertikalno centrirano)
+   - dani stoje iznad kućica (desno)
+   - “10 exercises” ostaje u jednom redu
+   ========================================================= */
+
+:root{
+  --wk-cell: 32px;     /* malo manje da uvijek stane */
+  --wk-gap: 7px;
+  --wk-actions-w: 98px; /* širina prostora za edit+delete */
+  --wk-grid-w: calc((7 * var(--wk-cell)) + (6 * var(--wk-gap)));
+  --wk-right-w: calc(var(--wk-actions-w) + 14px + var(--wk-grid-w)); /* 14px = gap */
+}
+
+/* Header red s danima */
+.wk-days{
+  display: grid !important;
+  grid-template-columns: 116px 1fr var(--wk-right-w) !important;
+  align-items: end !important;
+  padding: 0 18px !important;
+  margin: 6px 0 10px !important;
+}
+
+/* Grid dana ide u desnu kolonu, ali offsetan za akcije (da bude iznad kućica, ne iznad gumba) */
+.wk-days-grid{
+  grid-column: 3 !important;
+  display: grid !important;
+  grid-template-columns: repeat(7, var(--wk-cell)) !important;
+  gap: var(--wk-gap) !important;
+
+  width: var(--wk-grid-w) !important;
+  margin-left: auto !important;
+  justify-items: center !important;
+
+  /* pomak udesno “iza” action gumba */
+  transform: translateX(calc(var(--wk-actions-w) + 14px)) !important;
+  transform-origin: right bottom;
+}
+
+.wk-day-label{
+  font-size: 12px !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  opacity: .9;
+}
+
+/* Desni stupac s kućicama neka je uvijek dovoljno širok */
+.wk-done{
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  min-width: var(--wk-right-w) !important;
+}
+
+/* 7 kućica u gridu (ne smije se rastegnuti izvan) */
+.wk-done-grid{
+  display: grid !important;
+  grid-template-columns: repeat(7, var(--wk-cell)) !important;
+  gap: var(--wk-gap) !important;
+
+  width: var(--wk-grid-w) !important;
+  justify-items: center !important;
+  align-items: center !important;
+
+  margin-left: 0 !important;
+}
+
+/* checkbox button – fiksna veličina */
+.check{
+  width: var(--wk-cell) !important;
+  height: var(--wk-cell) !important;
+
+  min-width: 0 !important;
+  padding: 0 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  line-height: 1 !important;
+  font-size: 14px !important;
+  border-radius: 10px !important;
+}
+
+/* --- KLJUČ: da se kartica NE REŽE kad layout postane tijesan --- */
+/* (Ako imaš overflow:hidden na unutarnjem wrapperu, radije ga makni samo na DESKTOPU) */
+@media (min-width: 721px){
+  .workout-card,
+  .workout-row,
+  .workout-card-list{
+    overflow: visible !important;
+  }
+}
+
+/* --- Akcije (edit/delete) u istoj ravnini s kućicama --- */
+/* Ako imaš wrapper za gumbe, idealno je da se zove .wk-actions */
+.wk-actions{
+  width: var(--wk-actions-w) !important;
+  display: flex !important;
+  gap: 12px !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+}
+
+/* Ako NEMAŠ .wk-actions wrapper, ovo često pogodi oba gumba direktno */
+.wk-done .btn-icon,
+.wk-done button[aria-label="Edit"],
+.wk-done button[aria-label="Delete"]{
+  align-self: center !important;
+}
+
+/* --- “10 exercises” da ne puca u 2 reda --- */
+/* Pogodi tvoj pill/chip uz broj vježbi (ako je to .chip ili slično) */
+.workout-card .chip,
+.workout-row .chip,
+.workout-card-list .chip{
+  white-space: nowrap !important;
+}
+
+/* Ako ti je “10 exercises” u posebnoj klasi, još bolje: */
+.wk-ex-count,
+.wk-exercises{
+  white-space: nowrap !important;
+  font-size: 13px !important;
+}
+
+/* --- Mobilni tweak --- */
+@media (max-width: 560px){
+  :root{
+    --wk-cell: 30px;
+    --wk-gap: 6px;
+    --wk-actions-w: 92px;
+  }
+
+  .wk-days{
+    grid-template-columns: 96px 1fr var(--wk-right-w) !important;
+    padding: 0 12px !important;
+  }
+}
+/* FIX: dani iznad kućica, bez bježanja van okvira */
+.wk-days-grid{
+  transform: none !important;              /* <— makni translate */
+  width: var(--wk-grid-w) !important;
+  margin-left: auto !important;
+}
+.wk-days{
+  /* ostaje sve isto, samo dodaj ovo: */
+  padding-right: 18px !important;
+  padding-left: calc(18px + var(--wk-actions-w) + 14px) !important;
+}
+/* ================================
+   FIX: wk-days alignment
+   - Desktop: poravnaj iznad kućica (ostaje dobro na webu)
+   - Mobile: vrati normalno (da ne ode udesno)
+   ================================ */
+
+/* MOBILE / TABLET: reset (da ne gura udesno) */
+@media (max-width: 720px){
+  .wk-days{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .wk-days-grid{
+    transform: none !important;
+    margin-left: 0 !important;     /* neka krene normalno */
+  }
+}
+
+/* DESKTOP (WEB): poravnanje iznad kućica, bez izlaska van */
+@media (min-width: 721px){
+  .wk-days{
+    padding-right: 18px !important;
+    padding-left: calc(18px + var(--wk-actions-w) + 14px) !important;
+  }
+
+  .wk-days-grid{
+    transform: none !important;
+    width: var(--wk-grid-w) !important;
+    margin-left: auto !important;
+  }
+}
+/* ==========================================
+   MOBILE RESET (VRATI KAKO JE BILO PRIJE)
+   - NE DIRA DESKTOP (web ostaje dobro)
+   ========================================== */
+@media (max-width: 720px){
+
+  /* vrati wk-days na "staro": bez desktop grida */
+  .wk-days{
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    padding: 0 14px !important;
+    margin: 8px 0 10px !important;
+
+    /* poništi desktop grid postavke */
+    grid-template-columns: unset !important;
+  }
+
+  .wk-days-grid{
+    display: grid !important;
+    grid-template-columns: repeat(7, 26px) !important;
+    gap: 6px !important;
+
+    width: auto !important;
+    margin-left: 0 !important;
+    justify-items: center !important;
+
+    /* poništi sve desktop "grid-column / fit-content" fore */
+    grid-column: unset !important;
+    transform: none !important;
+  }
+
+  .wk-day-label{
+    font-size: 12px !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  /* isto vrati i kućice da na mobu stanu 7/7 bez rezanja */
+  .wk-done{
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+  }
+
+  .wk-done-grid{
+    display: grid !important;
+    grid-template-columns: repeat(7, 26px) !important;
+    gap: 6px !important;
+
+    width: auto !important;
+    margin-left: 0 !important;
+
+    justify-items: center !important;
+    align-items: center !important;
+  }
+
+  .check{
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 10px !important;
+    padding: 0 !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    min-width: 0 !important;
+    line-height: 1 !important;
+    font-size: 13px !important;
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <link rel="manifest" href="/manifest.json" />
+<meta name="theme-color" content="#0b0b0f" />
+
+<!-- iOS PWA "standalone" stil -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+<!-- (nije obavezno) iOS maskable izgleda OK i bez posebnog splash-a -->
+
+    <meta charset="utf-8" />
+    <meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+/>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Fitness App</title>
+    <script>
+      (function () {
+        // pinch
+        document.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
+        // double-tap
+        let lastTouch = 0;
+        document.addEventListener('touchend', function (e) {
+          const now = Date.now();
+          if (now - lastTouch <= 300) { e.preventDefault(); }
+          lastTouch = now;
+        }, { passive: false });
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>Treba omogućiti JavaScript za pokretanje aplikacije.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
