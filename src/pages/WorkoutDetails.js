@@ -25,6 +25,7 @@ const MUSCLE_GROUPS = [
   "Core",
   "Cardio",
   "Mobility",
+  "Quads",
   "Other",
 ];
 
