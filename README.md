@@ -2,6 +2,14 @@
 
 A simple fitness tracking app built with **React** (Create React App), **Firebase** (Auth + Firestore) and **Capacitor** (Android wrapper).
 
+## Screenshots
+
+<div align="center">
+  <img src="assets/screenshot-1.png" width="260" alt="Screenshot 1" />
+  <img src="assets/screenshot-2.png" width="260" alt="Screenshot 2" />
+  <img src="assets/screenshot-3.png" width="260" alt="Screenshot 3" />
+</div>
+
 ## Features
 - Email/password authentication (Firebase Auth)
 - Workout plan by days + mark today’s workout as done
